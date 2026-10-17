@@ -8,5 +8,5 @@ Second, we want to establish an idea that for the same solver and the same amoun
 
 ![the picture below 1](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/discretisation-error.png)
 
-# How could distribution matching counteract discretisation error?
+# How could distribution matching loss counteract discretisation error?
 Because discretisation error is consistent in both direction and displacement. This means that for every Base Continuous, there is only 1 correct Perturbed Continuous that could recover ideal $X_1$ among infinite Perturbed Continuous trajectories that fail to do so. Now looking at Frechet Distance, Adversarial GAN, or KL, there's nothing in those distribution matching losses that explicit train the network to do this. And yet, toy experiment results shown us neural network could indeed do this to some extents. Why? Because the answer for each distribution matching loss is long, we place each answer in a separate markdown file. Enjoy reading.
