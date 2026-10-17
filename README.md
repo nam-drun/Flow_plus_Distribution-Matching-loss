@@ -1,4 +1,4 @@
-# Flow_plus_Distribution-Matching-loss
+# Flow + Distribution Matching loss
 This repo contains toy experiment results for post-training flow model in the following configurations:
 1. Flow + Frechet Distance (FD) loss
 2. Flow + FD loss + Adversarial loss using FD as distance metric
