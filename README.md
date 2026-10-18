@@ -8,7 +8,7 @@ We argue that all these papers including the current SOTA share the same common 
 
 Because it's not a clear yes or no on whether MDP is actually connected to Flow Matching; and because Flow + post train with distribution matching loss actually works, where KL works best compared to FD and AdvFD by a large margin; and because KL is an important term in GRPO loss, see equation (3) in [Flow-GRPO paper](https://arxiv.org/abs/2505.05470). Altogether, these open up 2 interesting scenarios. 
 1. Maybe MDP turns out to be the "distant prodigy heir" of Flow Matching, where it takes KL term to "unlock" the potential of MDP during post-training with RLHF. This means that everyone should migrate to MDP + RLHF for image generation.
-2. Or maybe MDP is not the distant prodigy heir. So practitioners have 2 choices: if having lots of compute to post-train, use MDP + RLHF; if not, use Flow + KL. Recall that Flow Matching is much more compute efficient than MDP.
+2. Or maybe MDP is not the distant prodigy heir. So practitioners have 2 choices: if having lots of compute to post-train, use MDP + RLHF; if not, use Flow + KL. This is because Flow Matching is already much more compute efficient than MDP, and post-training with distribution matching loss only makes Flow Matching even more compute efficient.
    
 In this work, we investigate to see which scenario is more likely true.
 
