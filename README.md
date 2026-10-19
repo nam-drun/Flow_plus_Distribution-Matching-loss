@@ -22,6 +22,9 @@ In other words, you can ignore the intuition behind Flow Matching by intentional
 
 ![the picture below](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/discretisation-error.png)
 
-Next, we will connect this idea to [IMDE paper](https://arxiv.org/abs/2206.07335) because their paper also discusses the same topic, but their discussion is much more rigorous. Meaning we can utilise many details in their papers to explain the patterns in our experiment results. Now, in general:
-- IMDE paper does not explain why any distribution matching loss learn some ***specific*** Perturbed Continuous trajectory that leverages 
+Next, we will connect this idea to [IMDE paper](https://arxiv.org/abs/2206.07335) because their paper also discusses the same topic but in a more rigorous manner. Meaning we can utilise many details in their papers to explain the patterns in our experiment results. Now, IMDE paper does not explain why...:
+- Any distribution matching loss would learn some ***specific*** Perturbed Continuous trajectory that achieves the left panel instead of the right panel in the picture above. E.g., why would Fréchet distance, a loss function that matches mean and covariance, would encourage the neural network learn this ***specific*** trajectory?
+- Learning this ***specific*** trajectory would lead to a generated distribution that is closely matching $P^*$ than $P_1$. Remember, we have just ignored Flow Matching by intentionally learn a different velocity field. So why would this work?
+
+So in general, IMDE paper needs to be expanded to explain the patterns in our experiment results. For this reason, we will explain why does each distribution matching loss work in a separated markdown file. Enjoy reading.
 
