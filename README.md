@@ -26,5 +26,5 @@ Next, we will connect this idea to [IMDE paper](https://arxiv.org/abs/2206.07335
 - Any distribution matching loss would learn some ***specific*** Perturbed Continuous trajectory that achieves the left panel instead of the right panel in the picture above. E.g., why would Fréchet distance, a loss function that matches mean and covariance, would encourage the neural network learn this ***specific*** trajectory?
 - Learning this ***specific*** trajectory would lead to a generated distribution that is closely matching $P^*$ than $P_1$. Remember, we have just ignored Flow Matching by intentionally learn a different velocity field. So why would this work?
 
-So in general, IMDE paper needs to be expanded to explain the patterns in our experiment results. For this reason, we will explain why does each distribution matching loss work in a separated markdown file. Enjoy reading.
+In short, IMDE paper needs to be expanded to explain the patterns in our experiment results. For this reason, we will explain why does each distribution matching loss work in a separated markdown file. Enjoy reading.
 
