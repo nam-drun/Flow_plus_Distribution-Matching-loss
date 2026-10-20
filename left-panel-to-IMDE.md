@@ -11,4 +11,4 @@
 | $`e_B^{disc}`$                        | $`\left(\Phi_{h,f}\right)^S \left(x \right) - \phi_{Sh,f(x)}`$                                     | discretisation error of base model             |
 | $`d_N`$                               | $`\left(\Phi_{h,f_{\theta}}\right)^S \left(x \right) - \left(\Phi_{h,f}\right)^S \left(x \right)`$ | Perturbed Euler endpoint - Base Euler endpoint |
 
-Suppose you want to reproduce the left panel, then naturally $e_B^{disc} + d_N = 0$. In IMDE paper, this expression is $\left(\Phi_{h,f_{\theta}}\right)^N \left(x \right) - \left(\Phi_{h,f}\right)^N \left(x \right) - \phi_{Sh,f(x)}$.
+Suppose you want to reproduce the left panel, then naturally $e_B^{disc} + d_N = 0$. In IMDE paper, this expression is $`\left(\Phi_{h,f_{\theta}}\right)^N \left(x \right) - \phi_{Sh,f(x)}`$.
