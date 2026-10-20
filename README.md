@@ -8,7 +8,7 @@ We think that all these papers including current SOTA share the same common in l
 - If MDP can inherit the "compute efficiency" aspect of Flow Matching via RLHF. Then that's it, everyone will migrate to MDP + RLHF.
 - But if not. Then Flow Matching + distribution matching loss provides a cheap alternative for anyone who doesn't have enough compute to post-train MDP + RLHF.
 
-***If the intuition from IMDE is found in MDP + RLHF, like we have discovered its presence in Flow Matching + distribution matching, then it will provide more avenue to explore on how to make MDP + RLHF inherits the "compute efficiency" aspect of Flow Matching.***
+***If the intuition from IMDE is found in MDP + RLHF, like how we have discovered its presence in Flow Matching + distribution matching, then it will provide more avenue to explore on how to make MDP + RLHF inherits the "compute efficiency" aspect of Flow Matching.***
 
 # Flow Matching recap
 If you try to sample any distribution in practice, you will see a point cloud. Suppose you transport all samples of this distribution to some other positions in space after $T$ time, then you will get another distribution $P_t$ (unless somehow $X_0 = X_T$). In physics, you learn about *displacement = velocity x time*, i.e., $X_{t_{k+1}} = X_{t_k} + \Delta t v(t_k, X_{t_k}$. Same idea applies for here. During sampling, given $X_0 \sim \mathcal{N}(0, I_d)$, you "transport" that sample to $X_1$ using *next position = current position + velocity x time*, which is literally the case if you use Euler integration solver, but still holds true for more accurate solvers like Heun and Dormand-Prince 5(4). Now, set $T = 1$, $P_0 = \mathcal{N}(0, I_d)$ and $P_1 = $ *data distribution*, then you have discovered flow matching
