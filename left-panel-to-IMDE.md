@@ -12,5 +12,5 @@
 
 Suppose you want to reproduce the left panel, then naturally $e_B^{disc} + d_N = 0$. In IMDE paper, this is $`\left(\Phi_{h,f_h}\right)^S \left(x \right) - \phi_{Sh,f(x)}`$. Theorem 3.2 tells us that:
 ```math
-\left(\Phi_{h,f}\right) = \phi_{h,f(x)} + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2})
+\Phi_{h,f}(x) = \phi_{h,f(x)} + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2})
 ```
