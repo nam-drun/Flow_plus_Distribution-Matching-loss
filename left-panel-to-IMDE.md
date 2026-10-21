@@ -1,4 +1,4 @@
-| Left panel                            | [IMDE paper](https://arxiv.org/abs/2206.07335) | Meaning                                           | How to access these expression during training/sampling            |
+| Left panel                            | [IMDE paper](https://arxiv.org/abs/2206.07335) | Meaning                                           | How to access them during training/sampling                        |
 | ------------------------------------  | -----------------------------------------------| --------------------------------------------------|------------------------------------------------------------------- | 
 | N                                     | S                                              | number of sampling steps                          | $\frac1N = \Delta t = h$                                           | 
 | $X_0$                                 | $x$                                            | start point                                       | $X_0 \sim \mathcal{N}(0, I_d)$                                     |
