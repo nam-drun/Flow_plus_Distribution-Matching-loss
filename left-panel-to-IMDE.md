@@ -10,19 +10,22 @@
 | $`e_B^{disc}`$                        | $(\Phi_{h,f})^S(x) - \phi_{Sh,f}(x)$           | discretisation error at $t=1$ of Base model       | $`e_B^{disc} = \hat{X}_1^{Euler, B} - X_1`$                        |
 | $`d_N`$                               | $(\Phi_{h,f_h})^S(x) - (\Phi_{h,f})^S(x)$      | discretisation error counteraction at $t=1$       | $`d_N = \hat{X}_1^{Euler, P} - \hat{X}_1^{Euler, B}`$              |
 
-The left panel in the main page was not just merely illustrative. We want to visually invoke an idea that if you want $`\hat{X}_1^{Euler, P}`$ to be $X_1$, then $e_B^{disc} + d_N$ needs to 0. In IMDE's notation, $e_B^{disc} + d_N$ is $(\Phi_{h,f_h})^S(x) - \phi_{Sh,f}(x)$. Now, the first expression in theorem 3.2 in IMDE paper is:
+# What to get out from IMDE paper
+The left panel in the main page was not just merely illustrative. We want to visually invoke an idea that if you want $`\hat{X}_1^{Euler, P}`$ to be $X_1$, then you need $e_B^{disc} + d_N$ to be 0. More importantly, if we want to understand the implication of IMDE paper with respects to post training Flow Matching with distribution matching loss, then we'll need to quantify the relationship between $v_P(t, X_t^P)$ and $v_B(t, X_t)$. Because for a given pair of $`\left\{X_0,X_1\right\}`$, if we know can derive $v_P(t, X_t^P)$, then we can measure on how well does distribution matching loss makes learned velocity field getting closer to ideal perturbed velocity field. 
+
+# IMDE + Alekseev-Grobner formula
+Now, $e_B^{disc} + d_N$ in IMDE's notation is $(\Phi_{h,f_h})^S(x) - \phi_{Sh,f}(x)$. Now, the first expression in theorem 3.2 in IMDE paper is:
 ```math
 \begin{align*}
 & \Phi_{h,f}(x) = \phi_{h,f}(x) + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}) \\
 & \Phi_{h,f}(x) - \phi_{h,f}(x) = h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}) \\
 \end{align*}
 ```
-As shown above, once we arrange this expression, now it means that the discretisation error at each time step has some specific relationship with arbitrary $p^{th}$-order integration solver and $\Delta t$. In IMDE paper, we further see that this relationship is backed by their Figure 2, but whether it actually holds for Flow Matching's discretisation error, that's an open question. For the moment, what matters is that how do we connect $\Phi_{h,f}(x) - \phi_{h,f}(x)$ to $(\Phi_{h,f_h})^S(x) - \phi_{Sh,f}(x)$. Here, IMDE paper provides this equality to enable this connection:
+As shown above, once we arrange this expression, now it means that the discretisation error at each time step has some specific relationship with arbitrary $p^{th}$-order integration solver and $\Delta t$. In IMDE paper, we further see that this relationship is backed by their Figure 2, but whether it holds for Flow Matching's discretisation error, that's an open question. For the moment, what matters is that how do we connect $\Phi_{h,f}(x) - \phi_{h,f}(x)$ to $(\Phi_{h,f_h})^S(x) - \phi_{Sh,f}(x)$. Here, IMDE paper provides this equality to enable this connection:
 ```math
 \begin{align*}
 (\Phi_{h,f_h})^S(x) = (\phi_{h,f})^S(x) = \phi_{Sh,f}(x)
 \end{align*}
 ```
-
-$\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuous trajectory into $S$ segments, each segment now has $h$ time interval. Now, $(\Phi_{h,f_h})^S(x) = \phi_{Sh,f}(x)$ is basically saying we wish $`\hat{X}_1^{Euler, P}`$ to be $X_1$.
+$\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuous trajectory into $S$ segments, each segment now has $h$ time interval. Now, $(\Phi_{h,f_h})^S(x) = \phi_{Sh,f}(x)$ is basically saying we wish $`\hat{X}_1^{Euler, P}`$ to be $X_1$. So now we have $`(\Phi_{h,f_h})^S(x) = (\phi_{h,f})^S(x)`$. But this is not yet related to $`\Phi_{h,f}(x) - \phi_{h,f}(x)`$, and we are still not remotely closer to finding out the relationship between $v_P(t, X_t^P)$ and $v_B(t, X_t)$. Enter Alekseev-Grobner; but not just any arbitrary Alekseev-Grobner, we will use the Alekseev-Grobner from [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY).
 
