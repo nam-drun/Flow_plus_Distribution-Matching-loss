@@ -27,5 +27,14 @@ As shown above, once we arrange this expression, now it means that the discretis
 (\Phi_{h,f_h})^S(x) = (\phi_{h,f})^S(x) = \phi_{Sh,f}(x)
 \end{align*}
 ```
-$\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuous trajectory into $S$ segments, each segment now has $h$ time interval. Now, $(\Phi_{h,f_h})^S(x) = \phi_{Sh,f}(x)$ is basically saying we wish $`\hat{X}_1^{Euler, P}`$ to be $X_1$. So now we have $`(\Phi_{h,f_h})^S(x) = (\phi_{h,f})^S(x)`$. But this is not yet related to $`\Phi_{h,f}(x) - \phi_{h,f}(x)`$, and we are still not remotely closer to finding out the relationship between $v_P(t, X_t^P)$ and $v_B(t, X_t)$. Enter Alekseev-Grobner; but not just any arbitrary Alekseev-Grobner, we will use the Alekseev-Grobner from [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY).
+$\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuous trajectory into $S$ segments, each segment now has $h$ time interval. Now, $(\Phi_{h,f_h})^S(x) = \phi_{Sh,f}(x)$ is basically saying we wish $`\hat{X}_1^{Euler, P}`$ to be $X_1$. So now we have $`(\Phi_{h,f_h})^S(x) = (\phi_{h,f})^S(x)`$. But this is not yet related to $`\Phi_{h,f}(x) - \phi_{h,f}(x)`$, and we are still not remotely closer to finding out the relationship between $v_P(t, X_t^P)$ and $v_B(t, X_t)$. Enter Alekseev-Grobner formula from [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY).
+```math
+\begin{align*}
+& Y_{0,t}^x - Z_{0,t}^x = \int_0^t \left(\nabla_x Y_{s,t}^{Z_s} \right) \left(v_\theta(Z_s,s) - v^X(Z_s,s) \right) ds \\
+& \text{Recontextualise this equation for our purpose}: \\
+& X_1^P - X_1 = \int_0^1 \nabla_x \phi^B_{t,1}
+\end{align*}
+```
+
+
 
