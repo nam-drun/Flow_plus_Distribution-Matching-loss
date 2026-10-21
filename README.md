@@ -25,7 +25,7 @@ The next step in Flow Matching is to find out how to train the neural network on
 
 
 # How to leverage discretisation error, instead of fighting it
-Given some pretrained velocity field $v_{Base}(t, x)$, it is not a surprise that during post-training, distribution matching loss perturbs $v_B(t, x)$. This means that for the same start point $X_0$, $v_{Perturbed}(t, x)$ will transport $X_0$ along some different trajectory (Perturbed Continuous) to arrive a different endpoint. Assume that $v_B(t, x)$ and $v_P(t, x)$ are perfectly learned, respectively. 
+Given some pretrained velocity field $v_B(t, x)$, it is not a surprise that during post-training, distribution matching loss perturbs $v_B(t, x)$. This means that for the same start point $X_0$, $v_P(t, x)$ will transport $X_0$ along some different trajectory (Perturbed Continuous) to arrive a different endpoint. Assume that $v_B(t, x)$ and $v_P(t, x)$ are perfectly learned, respectively. 
 > You can learn a perturbed velocity field that belongs to some ***specific*** Perturbed Continuous trajectory, such that its Perturbed Euler can recover $X_1$ exactly (see the left panel in the picture below).
 
 In other words, you intentionally learn a different velocity field that Flow Matching considers "wrong" (i.e., not arriving $X_1$ with Base Continuous), but still arriving $X_1$ with Perturbed Euler during sampling by leveraging discretisation error (see the left panel in the picture below). This brings us 2 questions: 
