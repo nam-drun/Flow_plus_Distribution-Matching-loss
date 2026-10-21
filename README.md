@@ -17,7 +17,7 @@ If you try to sample any distribution in practice, you will see a point cloud. S
 & \hat{X}_1 = X_0 + \Delta t \sum_{k=0}^{N-1} v(t, X_{t_k}), \\
 & \text{where } \Delta t = \frac1N, N \text{ is number of sampling steps} \\
 & N \to \infty \implies \Delta t \to 0 \implies \Delta t \sum_{k=0}^{N-1} v(t, X_{t_k}) \to \int_0^1 v(s, X_s) ds \\
-& \implies &\text{discretisation error} \to 0 \implies \hat{X}_1 \to X_1
+& \implies \text{discretisation error} \to 0 \implies \hat{X}_1 \to X_1
 \end{align*}
 ```
 
