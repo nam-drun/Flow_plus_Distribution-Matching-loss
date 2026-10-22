@@ -37,7 +37,7 @@ In other words, you intentionally learn a different velocity field that Flow Mat
 - Given $X_0$, where is its corresponding Perturbed Continuous?
 - And how can distribution matching loss during training find Perturbed Continuous? 
 
-![the picture below](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/discretisation-error.png)
+![the picture below](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/plots/discretisation-error.png)
 
 For the first question, define discretisation error of Base Continuous as $e_B^{disc} = X_1 - \hat{X}_1$. Now, because $`\left\{X_0,X_1\right\}`$ is drawn randomly. Having access to $X_1$ is easy if you have pretrained the Flow Matching/Diffusion model from scratch. But if you have the access to the pretrained checkpoint, then you'll need to continue pretraining the model to have access to $X_1$. Here, so long as high $\mathbb{R}_d \implies \mathbb{E}[\dot{X}_t \mid X_t = x] \approx \dot{X}_t$ (which is always the case in image generation), then Base Euler's end point $\hat{X}_1$ ***solely** tied to ***that specific*** pair $`\left\{X_0,X_1\right\}`$, not any other pair $`\left\{X_0,X_1\right\}`$ (as visually suggested by the picture above). Now, if you want Perturbed Euler's endpoint to be $X_1$ like in the left panel above, then Perturbed Continuous' end point need to be $X_1 + e_B^{disc}$. By comparison, Base Euler's end point is $X_1 - e_B^{disc}$. As $X_1 + e_B^{disc}$ and $X_1 - e_B^{disc}$ are 2 opposite points in space centred at $X_1$. This concludes the first question.
 
