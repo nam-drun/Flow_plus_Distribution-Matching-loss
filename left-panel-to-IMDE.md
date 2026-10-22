@@ -11,22 +11,20 @@
 | $`d_N`$                               | $(\Phi_{h,f_h})^S(x) - (\Phi_{h,f})^S(x)$      | discretisation error counteraction at $t=1$       | $`d_N = \hat{X}_1^{Euler, P} - \hat{X}_1^{Euler, B}`$              |
 
 # What to get out from IMDE paper
-Besides illustrating that we want $`\hat{X}_1^{Euler, P}`$ to be $X_1$, the left panel also displays our challenge. We don't really know Perturbed Continuous trajectory $X_t^P$ really is. This matters because we'll need to quantify the relationship between $v_P(t, X_t^P)$ and $v_B(t, X_t)$. So that given pair of $`\left\{X_0,X_1\right\}`$, if we know can derive $v_P(t, X_t^P)$, then we can measure on how well does distribution matching loss makes learned velocity field getting closer to ideal perturbed velocity field. 
+Besides illustrating that we want $`\hat{X}_1^{Euler, P}`$ to be $X_1$, the left panel also displays our challenge. We don't really know Perturbed Continuous trajectory $`X_t^P`$ really is. This matters because we'll need to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)`$. So that given pair of $`\left\{X_0,X_1\right\}`$, if we can derive $`v_P(t, X_t^P)`$, then we can measure on how well does distribution matching loss makes learned velocity field getting closer to ideal perturbed velocity field. 
 
 # Theorem 3.2 in IMDE
 Now, the first expression in theorem 3.2 is:
 ```math
 \begin{align*}
-& \text{Given that:} 
 & \Phi_{h,f}(x) = \phi_{h,f}(x) + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}) \\
 & \Phi_{h,f}(x) - \phi_{h,f}(x) = h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}), \\
 \end{align*}
 ```
 
-Which is backed by Figure 2 in the paper. This expression implicates that its equation (3) in IMDE paper (i.e., essentially power series expansion of $v_P(t, X_t^P)$) now has at least 1 term that leverage discretisation error to recover clean image:
+Which is backed by Figure 2 in the paper. This expression implicates that its equation (3) in IMDE paper (i.e., essentially power series expansion of $`v_P(t, X_t^P)`$) now has at least 1 term that leverage discretisation error to recover clean image. That term is $-\delta f$.
 ```math
 \begin{align*}
-& \text{Equation (3) in IMDE paper now becomes: } \\
 & f_h - f = - h^p -\delta f + \mathcal{O}(h^{p+1}) \\
 & f_h - f = -\delta f h^p + \mathcal{O}(h^{p+1}) \\
 & v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) \\
