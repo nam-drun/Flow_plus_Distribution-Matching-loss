@@ -1,5 +1,5 @@
 # Why care?
-Current SOTA in image generation is MDP + post-train with RLHF. For example, see [Qwen Image 2.0 technical reports](https://arxiv.org/pdf/2606.27608v1). Previous SOTA in image generation was Flow Matching and modern Diffusion. It looked like the time for Flow Matching has passed. Except that recently, people have figured out that you can post-train flow models with various distribution matching losses such as:
+Current SOTA in image generation is MDP + post-train with RLHF. For example, see [Qwen Image 2.0 technical reports](https://arxiv.org/pdf/2606.27608v1). Previous SOTA in image generation was Flow Matching and modern Diffusion. It looked like the time for Flow Matching has passed. Except that throughout 2025-2026, people have figured out that you can post-train flow models with various distribution matching losses such as:
 - Fréchet distance, see [FD loss paper](https://arxiv.org/abs/2604.28190).
 - Adversarial GAN on Fréchet distance, see [AdvFD loss paper](https://arxiv.org/abs/2608.11205).
 - KL, see [TDM paper](https://arxiv.org/abs/2503.06674) and [Mgflow paper](https://arxiv.org/abs/2609.35763).
