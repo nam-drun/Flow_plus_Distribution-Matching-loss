@@ -30,6 +30,8 @@ Which is backed by Figure 2 in the paper. This expression implicates that its eq
 & v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) \\
 \end{align*}
 ```
-Here, we can see that $v_P(t,x) - v_B(t,x)$  has some specific relationship with $p^{th}$-order integration solver and $\Delta t$. But this is not yet $v_P(t, X_t^P) - v_B(t, X_t)$, which is our goal if we want to quantify $v_P(t, X_t^P)$ and $v_B(t, X_t)$. ***Now, this is where the left panel and the IMDE theory diverges***: Essentially, left panel assumes that $`e_B^{disc} = e_P^{disc}`$ because there is no reason that Perturbed Continuous $X_t^p$ cannot be treated as it is another continuous trajectory in $`\mathbb{R}^d`$ like Base Continuous $X_t$; but IMDE predicts that $`e_P^{disc} = e_B^{disc} + \mathcal{O}(h^2)`$. So, there are 2 different hypotheses of how $v_P(t, X_t^P) - v_B(t, X_t)$ should be.
+Here, we can see that $v_P(t,x) - v_B(t,x)$  has some specific relationship with $p^{th}$-order integration solver and $\Delta t$. But this is not yet $v_P(t, X_t^P) - v_B(t, X_t)$, which is our goal if we want to quantify $v_P(t, X_t^P)$ and $v_B(t, X_t)$. ***Now, this is where the left panel and the IMDE theory diverges***: 
+- Left panel assumes that $`e_B^{disc} = e_P^{disc}`$ because there is no reason that Perturbed Continuous $X_t^p$ cannot be treated as it is another continuous trajectory in $`\mathbb{R}^d`$ like Base Continuous $X_t$; - IMDE predicts that $`e_P^{disc} = e_B^{disc} + \mathcal{O}(h^2)`$.
+Each of these hypothesis can express $v_P(t, X_t^P) - v_B(t, X_t)$ in their own way. So there are 2 different hypotheses of how $v_P(t, X_t^P) - v_B(t, X_t)$ should be.
 
 
