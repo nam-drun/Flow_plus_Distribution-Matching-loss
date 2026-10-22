@@ -3,10 +3,11 @@ Current SOTA in image generation is MDP + post-train with RLHF. For example, see
 - Fréchet distance, see [FD loss paper](https://arxiv.org/abs/2604.28190).
 - Adversarial GAN on Fréchet distance, see [AdvFD loss paper](https://arxiv.org/abs/2608.11205).
 - KL, see [TDM paper](https://arxiv.org/abs/2503.06674) and [Mgflow paper](https://arxiv.org/abs/2609.35763).
-With only 1 sampling step, these post-trained Flow Matching models could generate better quality images than pretrained Flow Matching with 50 sampling steps. For this reason, it's likely that 2027 will be the renaissance of Flow Matching. But even then, the big question remains: Given the following common sense:
+With only 1 sampling step, these post-trained Flow Matching models could generate better quality images than pretrained Flow Matching with 50 sampling steps. For this reason, it's likely that 2027 will be the renaissance of Flow Matching. But even then, the big question remains: Given the following common senses:
 - Pretrained Flow Matching is much more compute efficient than pretrained MDP.
 - Post-trained Flow is more compute efficient than pretrained Flow by an order of magnitude.
-- MDP and Flow Matching are only remotely related (in theory) via Hamilton-Bellman-Jacobi <-> Hamilton-Jacobi <-> Wasserstein, where only MDP is compatible with RLHF in image generation (see [DDPO paper](https://arxiv.org/abs/2305.13301))
+- MDP and Flow Matching are only remotely related (in theory) via Hamilton-Bellman-Jacobi <-> Hamilton-Jacobi <-> Wasserstein, where only MDP is compatible with RLHF in image generation (see [DDPO paper](https://arxiv.org/abs/2305.13301)).
+  
 The questions are:
 - Can post-trained Flow be even further optimised?
 - Can MDP + RLHF (e.g., [Flow-GRPO paper](https://arxiv.org/abs/2505.05470)) be more compute efficient than post-trained Flow?
