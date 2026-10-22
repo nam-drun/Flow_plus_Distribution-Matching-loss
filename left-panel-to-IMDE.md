@@ -31,8 +31,8 @@ $\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuo
 ```math
 \begin{align*}
 & Y_{0,t}^x - Z_{0,t}^x = \int_0^t \left(\nabla_x Y_{s,t}^{Z_s} \right) \left(v_\theta(Z_s,s) - v^X(Z_s,s) \right) ds \\
-& \text{Recontextualise this equation for our purpose}: \\
-& X_1^P - X_1 = \int_0^1 \nabla_x \phi^B_{t,1}
+& \text{Recontextualise this equation to left panel's notation}: \\
+& X_t^P - X_t = \int_0^t \left(\nabla_x X_{s,t}^{P, X_s} \right) \left(v_P(X_s,s) - v_B(X_s,s) \right) ds \\
 \end{align*}
 ```
 
