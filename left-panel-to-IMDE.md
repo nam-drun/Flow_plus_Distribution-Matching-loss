@@ -11,23 +11,26 @@
 | $`d_N`$                               | $(\Phi_{h,f_h})^S(x) - (\Phi_{h,f})^S(x)$      | discretisation error counteraction at $t=1$       | $`d_N = \hat{X}_1^{Euler, P} - \hat{X}_1^{Euler, B}`$              |
 
 # What to get out from IMDE paper
-The left panel in the main page was not just merely illustrative. We want to visually invoke an idea that if you want $`\hat{X}_1^{Euler, P}`$ to be $X_1$, then you need $e_B^{disc} + d_N$ to be 0. More importantly, if we want to understand the implication of IMDE paper with respects to post training Flow Matching with distribution matching loss, then we'll need to quantify the relationship between $v_P(t, X_t^P)$ and $v_B(t, X_t)$. Because for a given pair of $`\left\{X_0,X_1\right\}`$, if we know can derive $v_P(t, X_t^P)$, then we can measure on how well does distribution matching loss makes learned velocity field getting closer to ideal perturbed velocity field. 
+Besides illustrating that we want $`\hat{X}_1^{Euler, P}`$ to be $X_1$, the left panel also displays our challenge. We don't really know Perturbed Continuous trajectory $X_t^P$ really is. This matters because we'll need to quantify the relationship between $v_P(t, X_t^P)$ and $v_B(t, X_t)$. So that given pair of $`\left\{X_0,X_1\right\}`$, if we know can derive $v_P(t, X_t^P)$, then we can measure on how well does distribution matching loss makes learned velocity field getting closer to ideal perturbed velocity field. 
 
-# IMDE + Alekseev-Grobner formula
-Now, $e_B^{disc} + d_N$ in IMDE's notation is $(\Phi_{h,f_h})^S(x) - \phi_{Sh,f}(x)$. Now, the first expression in theorem 3.2 in IMDE paper is:
+# Theorem 3.2 in IMDE + Alekseev-Grobner formula
+Now, theorem 3.2 in IMDE paper is:
 ```math
 \begin{align*}
+& \text{Given that:} 
 & \Phi_{h,f}(x) = \phi_{h,f}(x) + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}) \\
-& \Phi_{h,f}(x) - \phi_{h,f}(x) = h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}) \\
+& \Phi_{h,f}(x) - \phi_{h,f}(x) = h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}), \\
+& \text{which is backed by Figure 2 in the paper}. \\
+& \text{This means that equation (3) in IMDE paper now becomes: } \\
+& f_h = f + h^p f_p + h^{p+1} f_{p+1} + \cdots \\
+& f_h = f + h^p f_p + \mathcal{O}(h^{p+1}) \\
+& \text{We want to leverage discretisation error, therefore } f_p = -\delta f \\
+& f_h - f = -\delta f h^p + \mathcal{O}(h^{p+1}) \\
+& \text{Rewrite this in our notation} \\
+& v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) \\
 \end{align*}
 ```
-As shown above, once we arrange this expression, now it means that the discretisation error at each time step has some specific relationship with arbitrary $p^{th}$-order integration solver and $\Delta t$. In IMDE paper, we further see that this relationship is backed by their Figure 2, but whether it holds for Flow Matching's discretisation error, that's an open question. For the moment, what matters is that how do we connect $\Phi_{h,f}(x) - \phi_{h,f}(x)$ to $(\Phi_{h,f_h})^S(x) - \phi_{Sh,f}(x)$. Here, IMDE paper provides this equality to enable this connection:
-```math
-\begin{align*}
-(\Phi_{h,f_h})^S(x) = (\phi_{h,f})^S(x) = \phi_{Sh,f}(x)
-\end{align*}
-```
-$\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuous trajectory into $S$ segments, each segment now has $h$ time interval. Now, $(\Phi_{h,f_h})^S(x) = \phi_{Sh,f}(x)$ is basically saying we wish $`\hat{X}_1^{Euler, P}`$ to be $X_1$. Now, enter Alekseev-Grobner formula from [Benton paper](https://openreview.net/forum?id=uqQPyWFDhY):
+Here, we can see that $v_P(t,x) - v_B(t,x)$  has some specific relationship with $p^{th}$-order integration solver and $\Delta t$. But this is not yet $v_P(t, X_t^P) - v_B(t, X_t)$, which is our goal if we want to quantify $v_P(t, X_t^P)$ and $v_B(t, X_t)$. Now, enter Alekseev-Grobner formula from [Benton paper](https://openreview.net/forum?id=uqQPyWFDhY):
 ```math
 \begin{align*}
 & Y_{0,t}^x - Z_{0,t}^x = \int_0^t \left(\nabla_x Y_{s,t}^{Z_s} \right) \left(v_\theta(Z_s,s) - v^X(Z_s,s) \right) ds \\
