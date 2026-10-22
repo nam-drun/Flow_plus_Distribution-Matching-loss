@@ -30,24 +30,6 @@ Now, theorem 3.2 in IMDE paper is:
 & v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) \\
 \end{align*}
 ```
-Here, we can see that $v_P(t,x) - v_B(t,x)$  has some specific relationship with $p^{th}$-order integration solver and $\Delta t$. But this is not yet $v_P(t, X_t^P) - v_B(t, X_t)$, which is our goal if we want to quantify $v_P(t, X_t^P)$ and $v_B(t, X_t)$. Now, enter Alekseev-Grobner formula from [Benton paper](https://openreview.net/forum?id=uqQPyWFDhY):
-```math
-\begin{align*}
-& Y_{0,t}^x - Z_{0,t}^x = \int_0^t \left(\nabla_x Y_{s,t}^{Z_s} \right) \left(v_\theta(Z_s,s) - v^X(Z_s,s) \right) ds \\
-& \forall t \in [s,t], Z_s \subset Z_{0,t}^x \text{ trajectory } \\
-& \left(\nabla_x Y_{s,t}^{Z_s} \right) = \lim_{\epsilon \to 0} \frac{Y_{s,t}^{Z_s + \epsilon} - Y_{s,t}^{Z_s}}{\epsilon} \\
-\\
-& \text{Recontextualise this equation for the left panel}: \\
-& X_1^P - X_1 = \int_0^1 \left(\nabla_x X_{s,1}^{P, X_s} \right) \left(v_P(X_s,s) - v_B(X_s,s) \right) ds, \\
-& \forall s \in [s,1], X_s \subset \text{ Base Continuous } X_t \text{ trajectory } \\
-& \nabla_x X_{s,1}^{P, X_s} = \lim_{\epsilon \to 0} \frac{X_{s,1}^{P, X_s + \epsilon} - X_{s,1}^{P, X_s}}{\epsilon}
-\end{align*}
-```
-Rather than just believing our words. It's better to see it for yourself of what Alekseev-Grobner formula was trying to describe with the pictures below. As we recontextualise this formula, we simply say: Let dashed grey trajectory be Base Continuous that arrives $X_1$ at final time $t$, dashed purple line be Perturbed Continuous that arrives $X_1^P$ at final time $t$, and the purple line branching from dashed grey line be $X_{s,1}^{P, X_s}$. As shown by the 2nd picture below, $\left(\nabla_x X_{s,1}^{P, X_s} \right)$ simply tells us how changing the start point $X_s$ of the $X_{s,1}^{P, X_s}$ trajectory could alter its endpoint.
-
-![alekseev-grobner-p1.png](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/plots/alekseev-grobner-p1.png)
-
-![alekseev-grobner-p2.png](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/plots/alekseev-grobner-p2.png)
-
+Here, we can see that $v_P(t,x) - v_B(t,x)$  has some specific relationship with $p^{th}$-order integration solver and $\Delta t$. But this is not yet $v_P(t, X_t^P) - v_B(t, X_t)$, which is our goal if we want to quantify $v_P(t, X_t^P)$ and $v_B(t, X_t)$. 
 
 
