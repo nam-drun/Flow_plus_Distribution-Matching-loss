@@ -1,11 +1,5 @@
 # Why care?
-Current SOTA in image generation is MDP + post-train with RLHF. For example, see [Qwen Image 2.0 technical reports](https://arxiv.org/pdf/2606.27608v1). Previous SOTA in image generation was Flow Matching and modern Diffusion. It looked like the time for Flow Matching has passed. Except that throughout 2025-2026, people have figured out that you can post-train flow models with various distribution matching losses such as:
-- Fréchet distance, see [FD loss paper](https://arxiv.org/abs/2604.28190).
-- Adversarial GAN on Fréchet distance, see [AdvFD loss paper](https://arxiv.org/abs/2608.11205).
-- KL, see [TDM paper](https://arxiv.org/abs/2503.06674) and [Mgflow paper](https://arxiv.org/abs/2609.35763).
-With only 1 sampling step, these post-trained Flow Matching models could generate better quality images than pretrained Flow Matching with 50 sampling steps. For this reason, it's likely that 2027 will be the renaissance of Flow Matching.
-
-But even then, the big question remains: Given the following common senses:
+Current SOTA in image generation is MDP + post-train with RLHF. For example, see [Qwen Image 2.0 technical reports](https://arxiv.org/pdf/2606.27608v1). Previous SOTA in image generation was Flow Matching and modern Diffusion. It looked like the time for Flow Matching has passed. Except that throughout 2025-2026, people have figured out that you can post-train flow models with various distribution matching losses such as: [Flow + Fréchet distance](https://arxiv.org/abs/2604.28190); [Flow + Adversarial GAN on Fréchet distance](https://arxiv.org/abs/2608.11205); Flow + KL (see [TDM paper](https://arxiv.org/abs/2503.06674) and [Mgflow paper](https://arxiv.org/abs/2609.35763)). With only 1 sampling step, these post-trained Flow Matching models could generate better quality images than pretrained Flow Matching with 50 sampling steps. For this reason, it's likely that 2027 will be the renaissance of Flow Matching. But even then, the big question remains: Given the following common senses:
 - Pretrained Flow Matching is much more compute efficient than pretrained MDP.
 - Post-trained Flow is more compute efficient than pretrained Flow by an order of magnitude.
 - MDP and Flow Matching are only remotely related (in theory) via Hamilton-Bellman-Jacobi <-> Hamilton-Jacobi <-> Wasserstein, where only MDP is compatible with RLHF in image generation (see [DDPO paper](https://arxiv.org/abs/2305.13301)).
