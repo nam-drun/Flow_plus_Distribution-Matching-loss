@@ -40,7 +40,7 @@ $\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuo
 & \nabla_x X_{s,1}^{P, X_s} = \lim_{\epsilon \to 0} \frac{X_{s,1}^{P, X_s + \epsilon} - X_{s,1}^{P, X_s}}{\epsilon}
 \end{align*}
 ```
-Rather than just believing our words. It's better to see it for yourself of what Alekseev-Grobner formula was trying to describe with the pictures below. As we recontextualise this formula, we simply say: Let dashed grey trajectory be Base Continuous that arrives $X_1$ at final time $t$, dashed purple line be Perturbed Continuous that arrives $X_1^P$ at final time $t$, and the purple line branching from dashed grey line be $X_{s,1}^{P, X_s}$. 
+Rather than just believing our words. It's better to see it for yourself of what Alekseev-Grobner formula was trying to describe with the pictures below. As we recontextualise this formula, we simply say: Let dashed grey trajectory be Base Continuous that arrives $X_1$ at final time $t$, dashed purple line be Perturbed Continuous that arrives $X_1^P$ at final time $t$, and the purple line branching from dashed grey line be $X_{s,1}^{P, X_s}$. As shown by the 2nd picture below, $\left(\nabla_x X_{s,1}^{P, X_s} \right)$ simply tells us how changing the start point $X_s$ of the $X_{s,1}^{P, X_s}$ trajectory could alter its endpoint.
 
 ![alekseev-grobner-p1.png](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/plots/alekseev-grobner-p1.png)
 
