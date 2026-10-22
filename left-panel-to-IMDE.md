@@ -35,9 +35,9 @@ $\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuo
 & \left(\nabla_x Y_{s,t}^{Z_s} \right) = \lim_{\epsilon \to 0} \frac{Y_{s,t}^{Z_s + \epsilon} - Y_{s,t}^{Z_s}}{\epsilon} \\
 \\
 & \text{Recontextualise this equation for the left panel}: \\
-& X_t^P - X_t = \int_0^t \left(\nabla_x X_{s,t}^{P, X_s} \right) \left(v_P(X_s,s) - v_B(X_s,s) \right) ds, \\
-& \forall t \in [s,t], X_s \subset \text{ Base Continuous } X_t \text{ trajectory } \\
-& \nabla_x X_{s,t}^{P, X_s} = \lim_{\epsilon \to 0} \frac{X_{s,t}^{P, X_s + \epsilon} - X_{s,t}^{P, X_s}}{\epsilon}
+& X_1^P - X_1 = \int_0^1 \left(\nabla_x X_{s,1}^{P, X_s} \right) \left(v_P(X_s,s) - v_B(X_s,s) \right) ds, \\
+& \forall s \in [s,1], X_s \subset \text{ Base Continuous } X_t \text{ trajectory } \\
+& \nabla_x X_{s,1}^{P, X_s} = \lim_{\epsilon \to 0} \frac{X_{s,1}^{P, X_s + \epsilon} - X_{s,1}^{P, X_s}}{\epsilon}
 \end{align*}
 ```
 Rather than just believing our words. It's better to see it for yourself of what Alekseev-Grobner formula was trying to describe with the pictures below. As we recontextualise this formula, we simply say: Let dashed grey line be Base Continuous $X_t$, dashed purple line be Perturbed Continuous $X_t^P$, and the purple line branching from dashed grey line be $X_{s,t}^{P, X_s}$. 
