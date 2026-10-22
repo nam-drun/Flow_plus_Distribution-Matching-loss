@@ -33,6 +33,7 @@ $\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuo
 & Y_{0,t}^x - Z_{0,t}^x = \int_0^t \left(\nabla_x Y_{s,t}^{Z_s} \right) \left(v_\theta(Z_s,s) - v^X(Z_s,s) \right) ds \\
 & \forall t \in [s,t], Z_s \subset Z_{0,t}^x \text{ trajectory } \\
 & \left(\nabla_x Y_{s,t}^{Z_s} \right) = \lim_{\epsilon \to 0} \frac{Y_{s,t}^{Z_s + \epsilon} - Y_{s,t}^{Z_s}}{\epsilon} \\
+\\
 & \text{Recontextualise this equation for the left panel}: \\
 & X_t^P - X_t = \int_0^t \left(\nabla_x X_{s,t}^{P, X_s} \right) \left(v_P(X_s,s) - v_B(X_s,s) \right) ds, \\
 & \forall t \in [s,t], X_s \subset \text{ Base Continuous } X_t \text{ trajectory } \\
