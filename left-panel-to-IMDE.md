@@ -11,7 +11,8 @@
 | $`d_N`$                               | $(\Phi_{h,f_h})^S(x) - (\Phi_{h,f})^S(x)$      | discretisation error counteraction at $t=1$       | $`d_N = \hat{X}_1^{Euler, P} - \hat{X}_1^{Euler, B}`$              |
 
 # What to get out from IMDE paper
-Besides illustrating that we want $`\hat{X}_1^{Euler, P}`$ to be $X_1$, the left panel also displays our challenge. We don't really know Perturbed Continuous trajectory $`X_t^P`$ really is. This matters because we'll need to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)`$. So that given pair of $`\left\{X_0,X_1\right\}`$, if we can derive $`v_P(t, X_t^P)`$, then we can measure on how well does distribution matching loss makes learned velocity field getting closer to ideal perturbed velocity field. 
+We want to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)`$. So that we can verify on whether distribution matching loss makes learned velocity field getting closer to ideal perturbed velocity field. Here, the left panel also displays our challenge: We don't really know Perturbed Continuous trajectory $`X_t^P`$ really is, so we can't derive $`v_P(t, X_t^P)`$ like how Flow Matching typically does it. Fortunately, theorem 3.2 in IMDE paper can help us quantify $`v_P(t, X_t^P) - v_B(t, X_t)`$.
+
 
 # Theorem 3.2 in IMDE
 Now, the first expression in theorem 3.2 is:
@@ -22,7 +23,7 @@ Now, the first expression in theorem 3.2 is:
 \end{align*}
 ```
 
-Which is backed by Figure 2 in the paper. This expression implicates that its equation (3) in IMDE paper (i.e., essentially power series expansion of $`v_P(t, X_t^P)`$) now has at least 1 term that leverage discretisation error to recover clean image. That term is $-\delta f$.
+Which is backed by Figure 2 in the paper. This expression implicates that its equation (3) in IMDE paper (i.e., power series expansion of $`v_P(t, X_t^P)`$) is now affected by our intent to leverage discretisation error via the term $-\delta f$.
 ```math
 \begin{align*}
 & f_h - f = - h^p -\delta f + \mathcal{O}(h^{p+1}) \\
@@ -30,10 +31,17 @@ Which is backed by Figure 2 in the paper. This expression implicates that its eq
 & v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) \\
 \end{align*}
 ```
-Here, we can see that $v_P(t,x) - v_B(t,x)$  has some specific relationship with $p^{th}$-order integration solver and $\Delta t$. But this is not yet $v_P(t, X_t^P) - v_B(t, X_t)$, which is our goal if we want to quantify $v_P(t, X_t^P)$ and $v_B(t, X_t)$. ***Now, this is where the left panel and the IMDE theory diverges***: 
-- Left panel assumes that $`e_B^{disc} = e_P^{disc}`$ because there is no reason that Perturbed Continuous $X_t^p$ cannot be treated as it is $X_t$.
-- IMDE predicts that $`e_P^{disc} = e_B^{disc} + \mathcal{O}(h^2)`$.
 
-Each of these hypothesis can express $v_P(t, X_t^P) - v_B(t, X_t)$ in their own way. So there are 2 different hypotheses of how $v_P(t, X_t^P) - v_B(t, X_t)$ should be.
+Although this is not yet $`v_P(t, X_t^P) - v_B(t, X_t)`$, it is nonetheless enables us to delegate the unknown to a simpler expression
+```math
+\begin{align*}
+& v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_B(t, X_t^P) + v_B(t, X_t^P) - v_B(t, X_t) \\
+& v_P(t, X_t^P) - v_B(t, X_t) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) + v_B(t, X_t^P) - v_B(t, X_t)
+\end{align*}
+```
 
+Now we just need to quantify $`v_B(t, X_t^P) - v_B(t, X_t)`$ with Taylor expansion.
+```math
+v_B(t, X_t^P) = v_B(t, X_t) + \nabla_x v_B(t, X_t)(X_t^P - X_t) + \mathcal{O}(\left\| X_t^P - X_t  \right\|^2)
+```
 
