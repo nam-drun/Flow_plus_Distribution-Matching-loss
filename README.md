@@ -13,7 +13,7 @@ The questions are:
 - Can MDP + RLHF (e.g., [Flow-GRPO paper](https://arxiv.org/abs/2505.05470)) be more compute efficient than post-trained Flow?
 - Can a practical common feat between MDP and Flow Matching be founded?
 
-We think that all these questions tie back to how post-trained Flow models leverage discretisation error to get better quality image (see left panel in the picture below). 
+***We think that all these questions tie back to how post-trained Flow models leverage discretisation error to get better quality image (see left panel in the picture below)!!*** 
 
 
 # Flow Matching recap
