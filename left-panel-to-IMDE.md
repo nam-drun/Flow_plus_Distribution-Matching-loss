@@ -36,7 +36,9 @@ $\phi_{Sh,f}(x) = (\phi_{h,f})^S(x)$ just simply means you segment Base Continuo
 \end{align*}
 ```
 Rather than just believing our words. It's better to visualise what Alekseev-Grobner formula from Benton paper was trying to describe with the pictures below:
+
 ![alekseev-grobner-p1.png](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/plots/alekseev-grobner-p1.png)
+
 ![alekseev-grobner-p2.png](https://github.com/nam-drun/Flow_plus_Distribution-Matching-loss/blob/main/plots/alekseev-grobner-p2.png)
 
 
