@@ -44,7 +44,17 @@ Here, we invoke the Lipschitz regularity assumption on $v_B(t, X_t)$: $`\left\| 
 
 From this assumption on $v_B(t, X_t)$, we evoke another Lipschitz regularity assumption on $v_P(t,x)$: $`\left\| v_P(t, X_t^P) - v_P(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\|`$. ***The central theme of our work is that Perturbed Continuous is to be treated like another trajectory (continuous ODE)*** $\in \mathbb{R}_d$!! Sure, it cannot be a Flow Matching since the core tenet of Flow Matching is that there is only 1 trajectory $\in \mathbb{R}_d$ that transports $X_0 \to X_1$. But that doesn't mean Perturbed Continuous cannot be treated as some other continuous ODE $\in \mathbb{R}_d$. So now we can bound $`v_P(t, X_t^P) - v_B(t, X_t)`$ as follows:
 ```math
-\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| = L(t)_P \left\| X_t^P - X_t \right\| + \left\| \delta_{v_B}(t,X_t) h^p \right\| + \mathcal{O}(h^{p+1}) 
+\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\| + \left\| \delta_{v_B}(t,X_t) h^p \right\| + \mathcal{O}(h^{p+1}) 
 ```
 
-Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality.
+Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality. Gronwall's inequality has this basic structure:
+```math
+\begin{align*}
+& \text{Given } \dot{f}(t) \le B(t)f(t) \Leftrightarrow f(t) \le f(0) + \int_0^t g(s)f(s) ds, \\
+& \text{thus } f(t) \le f(0)\exp \left(\int_0^t g(s)ds \right) \\
+\end{align*}
+```
+where $`g(s)`$ and $`f(t)`$ are some real-valued functions. Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, hence $`\dot{f}(t) := \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$ and $`f(0) = 0`$ (Perturbed Continuous and Base Continuous starts from the same $`X_0`$). Now, we have just figured out the upper bound for $`\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$, so plug that into the RHS of Gronwall's inequality, we get:
+```math
+\left\| X_t^P - X_t \right\| \le \exp \left(\int_0^t g(s)ds \right)
+```
