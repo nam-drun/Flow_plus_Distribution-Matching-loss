@@ -23,12 +23,13 @@ Now, the first expression in theorem 3.2 is:
 \end{align*}
 ```
 
-Which is backed by Figure 2 in the paper. This expression implicates that its equation (3) in IMDE paper (i.e., power series expansion of $`v_P(t, X_t^P)`$) is now affected by our intent to leverage discretisation error via the term $-\delta f$.
+Which is backed by Figure 2 in the paper. This expression implicates that $`v_P(t, X_t^P)`$ is affected by our intent to leverage discretisation error via $-\delta f$.
 ```math
 \begin{align*}
 & f_h - f = - h^p -\delta f + \mathcal{O}(h^{p+1}) \\
 & f_h - f = -\delta f h^p + \mathcal{O}(h^{p+1}) \\
 & v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) \\
+& v_P(t,x) - v_B(t,x) = \mathcal{O}(h^p)
 \end{align*}
 ```
 
