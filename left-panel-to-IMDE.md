@@ -47,4 +47,4 @@ From this assumption on $v_B(t, X_t)$, we evoke another Lipschitz regularity ass
 \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| = L(t)_P \left\| X_t^P - X_t \right\| + \left\| \delta_{v_B}(t,X_t) h^p \right\| + \mathcal{O}(h^{p+1}) 
 ```
 
-Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$. And we will do that with Gronwall's inequality.
+Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality.
