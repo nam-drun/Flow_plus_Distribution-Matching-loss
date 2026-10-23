@@ -50,7 +50,7 @@ From this assumption on $v_B(t, X_t)$, we evoke another Lipschitz regularity ass
 Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality. Gronwall's inequality has this basic structure:
 ```math
 \begin{align*}
-& \text{Given } \dot{f}(t) \le B(t)f(t) \Leftrightarrow f(t) \le f(0) + \int_0^t g(s)f(s) ds, \\
+& \text{Given } \dot{f}(t) \le g(t)f(t) \Leftrightarrow f(t) \le f(0) + \int_0^t g(s)f(s) ds, \\
 & \text{thus } f(t) \le f(0)\exp \left(\int_0^t g(s)ds \right) \\
 \end{align*}
 ```
