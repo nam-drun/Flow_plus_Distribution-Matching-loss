@@ -46,5 +46,5 @@ Now we just need to quantify $`v_B(t, X_t^P) - v_B(t, X_t)`$ with Taylor expansi
 v_B(t, X_t^P) = v_B(t, X_t) + \nabla_x v_B(t, X_t)(X_t^P - X_t) + \mathcal{O}(\left\| X_t^P - X_t  \right\|^2)
 ```
 
-Here, we invoke the Lipschitz regularity assumption on $v_B(t,x)$, where $`\left\| v_B(t,x) - v_B(t, x+c) \right\| \le L_t \left\| (x+c) - x \right\|`$. This assumption generally holds true in Flow Matching, as shown by section 3.2 in [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY).
+Here, we invoke the Lipschitz regularity assumption on $v_B(t,x)$, where $`\left\| v_B(t,x) - v_B(t, x+c) \right\| \le L_t \left\| (x+c) - x \right\|`$. This assumption generally holds true in Flow Matching, as shown by section 3.2 in [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY). But that is a story for another time. For the moment, we introduce a 2nd assumption that is an extension of $`v_P(t,x) - v_B(t,x) = \mathcal{O}(h^p)`$ expression.
 
