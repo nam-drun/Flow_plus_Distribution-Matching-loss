@@ -11,10 +11,10 @@
 | $`d_N`$                               | $(\Phi_{h,f_h})^S(x) - (\Phi_{h,f})^S(x)$      | discretisation error counteraction at $t=1$       | $`d_N = \hat{X}_1^{Euler, P} - \hat{X}_1^{Euler, B}`$              |
 
 # What to get out from IMDE paper
-We want to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)`$. So that we can verify on whether distribution matching loss makes learned velocity field getting closer to ideal perturbed velocity field. Here, the left panel also displays our challenge: We don't really know Perturbed Continuous trajectory $`X_t^P`$ really is, so we can't derive $`v_P(t, X_t^P)`$ like how Flow Matching typically does it. Fortunately, theorem 3.2 in IMDE paper can help us quantify $`v_P(t, X_t^P) - v_B(t, X_t)`$.
+We want to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)`$. So that we can verify on whether distribution matching loss makes learned velocity field getting closer to $`v_P(t, X_t^P)`$. Here, the left panel also displays our challenge: We don't really know Perturbed Continuous trajectory $`X_t^P`$ really is, so we can't derive $`v_P(t, X_t^P)`$ like how Flow Matching typically does it. Fortunately, theorem 3.2 in IMDE paper can help us quantify $`v_P(t, X_t^P) - v_B(t, X_t)`$.
 
 
-# Theorem 3.2 in IMDE
+# Bounding theorem 3.2 from IMDE paper
 Now, the first expression in theorem 3.2 is:
 ```math
 \begin{align*}
@@ -36,15 +36,17 @@ Which is backed by Figure 2 in the paper. This expression implicates that $`v_P(
 Although this is not yet $`v_P(t, X_t^P) - v_B(t, X_t)`$, it is nonetheless enables us to delegate the unknown to a simpler expression
 ```math
 \begin{align*}
-& v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_B(t, X_t^P) + v_B(t, X_t^P) - v_B(t, X_t) \\
-& v_P(t, X_t^P) - v_B(t, X_t) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) + v_B(t, X_t^P) - v_B(t, X_t)
+& v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_P(t, X_t) + v_P(t, X_t) - v_B(t, X_t) \\
+& v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_P(t, X_t) -\delta_{v_B}(t,X_t) h^p + \mathcal{O}(h^{p+1}) 
 \end{align*}
 ```
 
-Now we just need to quantify $`v_B(t, X_t^P) - v_B(t, X_t)`$ with Taylor expansion.
-```math
-v_B(t, X_t^P) = v_B(t, X_t) + \nabla_x v_B(t, X_t)(X_t^P - X_t) + \mathcal{O}(\left\| X_t^P - X_t  \right\|^2)
-```
+Here, we invoke the Lipschitz regularity assumption on $v_B(t, X_t)$: $`\left\| v_B(t, X_t^P) - v_B(t, X_t) \right\| \le L(t) \left\| X_t^P - X_t \right\|`$. Note, if you feel confused about this statement, just read it as $`\left\| v_B(t, x + c) - v_B(t, x) \right\| \le L(t) \left\| (x + c) - x \right\|`$ with $`x \in X_t`$ and $`(x + c) \in X_t^P`$, then suddenly if I add $`c \to 0`$ this statement reads exactly like 1st principle of differentiation on $`v_B(t, x)`$. In other words, as $`c \to 0`$, $`L(t)`$ quite literally becomes the slope of $`v_B(t, x)`$. Anyway, this assumption generally holds true in Flow Matching, as shown by section 3.2 in [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY). From this assumption, we evoke another Lipschitz regularity assumption on $v_P(t,x)$: $`\left\| v_P(t, X_t^P) - v_P(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\|`$. ***The central theme of our work is that Perturbed Continuous should be treated like another continuous trajectory $\in \mathbb{R}_d$!!***.
 
-Here, we invoke the Lipschitz regularity assumption on $v_B(t,x)$, where $`\left\| v_B(t,x) - v_B(t, x+c) \right\| \le L_t \left\| (x+c) - x \right\|`$. This assumption generally holds true in Flow Matching, as shown by section 3.2 in [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY). But that is a story for another time. For the moment, we introduce a 2nd assumption that is an extension of $`v_P(t,x) - v_B(t,x) = \mathcal{O}(h^p)`$ expression.
+
+
+
+Here, we invoke the Lipschitz regularity assumption on $v_B(t,x)$, where $`\left\| v_B(t,x) - v_B(t, x+c) \right\| \le L_t \left\| (x+c) - x \right\|`$. This assumption generally holds true in Flow Matching, as shown by section 3.2 in [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY). Since $`v_P(t,x) - v_B(t,x) = \mathcal{O}(h^p)`$, we are going to make a relaxed assumption that $`\left\| v_P(t,x) - v_B(t,x) \right\| \le C(t,x)(h^p)`$. Here, if we want $`\left\| X_t^P - X_t  \right\| = \mathcal{O}(h^p)`$, all we need is that $`C(s,X_s) \le `$
+
+
 
