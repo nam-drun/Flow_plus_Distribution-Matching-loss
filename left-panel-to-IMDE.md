@@ -29,7 +29,6 @@ Which is backed by Figure 2 in the paper. This expression implicates that $`v_P(
 & f_h - f = - h^p -\delta f + \mathcal{O}(h^{p+1}) \\
 & f_h - f = -\delta f h^p + \mathcal{O}(h^{p+1}) \\
 & v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) \\
-& v_P(t,x) - v_B(t,x) = \mathcal{O}(h^p)
 \end{align*}
 ```
 
@@ -43,5 +42,9 @@ Although this is not yet $`v_P(t, X_t^P) - v_B(t, X_t)`$, it is nonetheless enab
 
 Here, we invoke the Lipschitz regularity assumption on $v_B(t, X_t)$: $`\left\| v_B(t, X_t^P) - v_B(t, X_t) \right\| \le L(t) \left\| X_t^P - X_t \right\|`$. Note, if you feel confused about this statement, just read it as $`\left\| v_B(t, x + c) - v_B(t, x) \right\| \le L(t) \left\| (x + c) - x \right\|`$ with $`x \in X_t`$ and $`(x + c) \in X_t^P`$, then suddenly if I add $`c \to 0`$ this statement reads exactly like 1st principle of differentiation on $`v_B(t, x)`$. In other words, as $`c \to 0`$, $`L(t)`$ quite literally becomes the slope of $`v_B(t, x)`$. Anyway, this assumption generally holds true in Flow Matching, as shown by section 3.2 in [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY). 
 
-From this assumption, we evoke another Lipschitz regularity assumption on $v_P(t,x)$: $`\left\| v_P(t, X_t^P) - v_P(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\|`$. ***The central theme of our work is that Perturbed Continuous is to be treated like another trajectory in Flow Matching***!! Sure, given the same start point $X_0$, Perturbed Continuous is a different trajectory (ODE solution) that arrives different end point. Sure, there's no reason that Perturbed Continuous will share the same schedule as pretrained Flow Matching model. But even with all that, Perturbed Continuous can still to be treated like another trajectory in Flow Matching.
+From this assumption on $v_B(t, X_t)$, we evoke another Lipschitz regularity assumption on $v_P(t,x)$: $`\left\| v_P(t, X_t^P) - v_P(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\|`$. ***The central theme of our work is that Perturbed Continuous is to be treated like another trajectory in Flow Matching***!! Sure, given the same start point $X_0$, Perturbed Continuous is a different trajectory (ODE solution) that arrives different end point. Sure, there's no reason that Perturbed Continuous will share the same schedule as pretrained Flow Matching model. But even with all that, Perturbed Continuous can still to be treated like another trajectory in Flow Matching. So now we can bound $`v_P(t, X_t^P) - v_B(t, X_t)`$ as follows:
+```math
+\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| = L(t)_P \left\| X_t^P - X_t \right\| + \left\| \delta_{v_B}(t,X_t) h^p \left\| + \mathcal{O}(h^{p+1}) 
+```
 
+Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$. And we will do that with Gronwall's inequality.
