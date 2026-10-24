@@ -11,10 +11,10 @@
 | $`d_N`$                               | $(\Phi_{h,f_h})^S(x) - (\Phi_{h,f})^S(x)$      | discretisation error counteraction at $t=1$       | $`d_N = \hat{X}_1^{Euler, P} - \hat{X}_1^{Euler, B}`$              |
 
 # What to get out from IMDE paper
-We want to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)`$. So that we can verify on whether distribution matching loss makes learned velocity field getting closer to $`v_P(t, X_t^P)`$. Here, the left panel also displays our challenge: We don't really know Perturbed Continuous trajectory $`X_t^P`$ really is, so we can't derive $`v_P(t, X_t^P)`$ like how Flow Matching typically does it. Fortunately, theorem 3.2 in IMDE paper can help us quantify $`v_P(t, X_t^P) - v_B(t, X_t)`$.
+We want to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)`$. So that we can verify on whether distribution matching loss makes learned velocity field getting closer to $`v_P(t, X_t^P)`$. Here, the left panel also displays our challenge: We don't really know Perturbed Continuous trajectory $`X_t^P`$ really is, so we can't derive $`v_P(t, X_t^P)`$ like how Flow Matching typically does it. Fortunately, theorem 3.2 in IMDE paper can help us quantify $`v_P(t, X_t^P) - v_B(t, X_t)`$, so that if we know $`v_B(t, X_t)`$, then we can derive $`v_B(t, X_t)`$.
 
 
-# Bounding theorem 3.2 from IMDE paper
+# IMDE paper + Gronwall's inequality
 Now, the first expression in theorem 3.2 is:
 ```math
 \Phi_{h,f}(x) = \phi_{h,f}(x) + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2})
@@ -76,3 +76,5 @@ Plug $`\left\| X_t^P - X_t \right\|`$ back to the RHS of $`\left\| v_P(t, X_t^P)
 ```math
 \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| \le h^p \left[g(t) + L_p(t) \int_0^t \exp \left(\int_s^t L_P(r) dr \right) g(s)ds \right]
 ```
+
+At this point, it is clear that IMDE paper with Gronwall's inequality won't have us deriving $`v_P(t, X_t^P)`$ exactly. So what is the remedy?
