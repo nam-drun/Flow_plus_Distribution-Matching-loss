@@ -43,12 +43,14 @@ where $`r_h(t,x) = f_{p+1} + h f_{p+2} + h^2 f_{p+3} + \cdots`$. Although this i
 
 Here, we invoke the Lipschitz regularity assumption on $v_B(t, X_t)$: $`\left\| v_B(t, X_t^P) - v_B(t, X_t) \right\| \le L(t) \left\| X_t^P - X_t \right\|`$. Note, if you feel confused about this statement, just read it as $`\left\| v_B(t, x + c) - v_B(t, x) \right\| \le L(t) \left\| (x + c) - x \right\|`$ with $`x \in X_t`$ and $`(x + c) \in X_t^P`$; then when I add $`c \to 0`$, this statement now reads like 1st principle of differentiation on $`v_B(t, x)`$. In other words, as $`c \to 0`$, $`L(t)`$ quite literally becomes the slope of $`v_B(t, x)`$. Anyway, this assumption generally holds true in Flow Matching, as shown by section 3.2 in [Error Bounds for Flow Matching Methods paper](https://openreview.net/forum?id=uqQPyWFDhY). 
 
-From this assumption on $v_B(t, X_t)$, we evoke another Lipschitz regularity assumption on $v_P(t,x)$: $`\left\| v_P(t, X_t^P) - v_P(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\|`$. Earlier, IMDE paper shows us that $`v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_P(t, X_t) -\delta_{v_B}(t,X_t) h^p + \mathcal{O}(h^{p+1})`$. Although this expression does not say that Perturbed Continuous can be treated like Base Continuous, it does rule out the idea that $v_P(t,x)$ cannot have have regularity assumption applied. So now we can bound $`v_P(t, X_t^P) - v_B(t, X_t)`$ as below:
+Now we introduce another Lipschitz regularity assumption on $v_P(t,x)$: $`\left\| v_P(t, X_t^P) - v_P(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\|`$. Because this assumption comes out of nowhere so let's try to justify it: The core tenet of Flow Matching is that the ODE continuous trajectory $`X_t`$ needs to transport $X_0 \to X_1$. Whereas the core tenet of IMDE paper is that each continuous trajectory $`X_t`$ is explicitly linked to a corresponding perturbed continuous trajectory $`X_t^P`$. From initial experiments with post-trained Flow model, we observe that when the number of sampling steps during pretraining and post-training is $`[1, 4]`$, we observe that the post-trained models consistently have less discretisation compared to pretrained models. This is especially true for Euler solver. Thus, in term of Frechet distance and Wasserstein-2 distance, post-trained $P_1$ is closer to data distribution than pretrained $`P_1`$. At the very least, that seems to suggest that for every Base Continuous, there exists a set of corresponding Perturbed Continuous trajectories somewhere in $`\mathbb{R}^d`$ such that its Perturbed Euler's endpoint is closer to ideal $X_1$ than Base Euler's endpoint. 
+
+With this Lipschitz regularity assumption on $v_P(t,x)$, we can bound $`v_P(t, X_t^P) - v_B(t, X_t)`$ as follows:
 ```math
 \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\| + \left\| h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \right\|
 ```
 
-Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality. Vanilla Gronwall's inequality has this basic structure:
+Now, we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality. Vanilla Gronwall's inequality has this basic structure:
 ```math
 \begin{align*}
 & \text{Given } \dot{f}(t) \le C(t)f(t) \Leftrightarrow f(t) \le f(0) + \int_0^t C(s)f(s) ds, \\
@@ -63,12 +65,9 @@ where $`C(s)`$ and $`f(t)`$ are some real-valued functions. But to deal with $`\
 \end{align*}
 ```
 
-Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, thus $`\dot{f}(t) = \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|` and $`C(t) := L_p(t)`$. For $`f(0)`, we'll set it `f(0) := 0`$ since Perturbed Continuous and Base Continuous starts from the same $`X_0`$. This means that the remaining term to be denoted is $`a(t) := \left\| h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \right\|`$.
-
-
-We have just figured out the upper bound for $`\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$. So plug that into the RHS of extended Gronwall's inequality, we get:
+Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, thus $`\dot{f}(t) = \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|` and $`C(t) := L_p(t)`$. For $`f(0)`, we'll set it `f(0) := 0`$ since Perturbed Continuous and Base Continuous starts from the same $`X_0`$. This means that the remaining term to be denoted is $`a(t) := \left\| h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \right\|`$. And with that, we now have access to the prerequisite condition of extended Gronwall's inequality. Applying extended Gronwall's inequality, we get:
 ```math
 \begin{align*}
-& \left\| X_t^P - X_t \right\| \le \int_0^t L_P(s) \left\| v_P(s, X_s^P) - v_B(s, X_s) \right\| ds + \int_0^t
+& \left\| X_t^P - X_t \right\| \le h^p \int_0^t \exp \left(\int_s^t L_P(r) dr \right) g(s)ds
 \end{align*}
 ```
