@@ -17,7 +17,7 @@ We want to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)
 # Bounding theorem 3.2 from IMDE paper
 Now, the first expression in theorem 3.2 is:
 ```math
-& \Phi_{h,f}(x) = \phi_{h,f}(x) + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}) \\
+\Phi_{h,f}(x) = \phi_{h,f}(x) + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2})
 ```
 
 Which is backed by Figure 2 in the paper. This expression implicates that $`v_P(t, X_t^P)`$ is affected by our intent to leverage discretisation error via $-\delta f$. Therefore, the power series expansion of $`v_P(t, X_t^P)`$ now becomes:
