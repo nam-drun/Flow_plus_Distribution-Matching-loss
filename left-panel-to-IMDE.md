@@ -22,17 +22,22 @@ Now, the first expression in theorem 3.2 is:
 
 Which is backed by Figure 2 in the paper. This expression implicates that $`v_P(t, X_t^P)`$ is affected by our intent to leverage discretisation error via $-\delta f$. Therefore, the power series expansion of $`v_P(t, X_t^P)`$ now becomes:
 ```math
+f_h - f = -h^p \delta f  + \mathcal{O}(h^{p+1})
+```
+
+Rewrite the LHS in "left panel"'s notation and write $`\mathcal{O}(h^{p+1})` in full form:
+```math
 \begin{align*}
-& f_h - f = -h^p \delta f  + \mathcal{O}(h^{p+1}) \\
-& v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + h^{p+1} f_{p+1} + h^{p+2} f_{p+2} + \cdots \\
+& v_P(t,x) - v_B(t,x) = -h^p \delta_{v_B}(t,x) + h^{p+1} f_{p+1} + h^{p+2} f_{p+2} + \cdots \\
+& v_P(t,x) - v_B(t,x) = -h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \\
 \end{align*}
 ```
 
-Although this is not yet $`v_P(t, X_t^P) - v_B(t, X_t)`$, but it nonetheless enables us to delegate the unknown to a simpler expression
+where $`r_h(t,x) = f_{p+1} + h f_{p+2} + h^2 f_{p+3} + \cdots`$. Although this is not yet $`v_P(t, X_t^P) - v_B(t, X_t)`$, but it nonetheless enables us to delegate the unknown to a simpler expression
 ```math
 \begin{align*}
 & v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_P(t, X_t) + v_P(t, X_t) - v_B(t, X_t) \\
-& v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_P(t, X_t) -\delta_{v_B}(t,X_t) h^p + \mathcal{O}(h^{p+1}) 
+& v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_P(t, X_t) -h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x)
 \end{align*}
 ```
 
@@ -40,7 +45,7 @@ Here, we invoke the Lipschitz regularity assumption on $v_B(t, X_t)$: $`\left\| 
 
 From this assumption on $v_B(t, X_t)$, we evoke another Lipschitz regularity assumption on $v_P(t,x)$: $`\left\| v_P(t, X_t^P) - v_P(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\|`$. Earlier, IMDE paper shows us that $`v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_P(t, X_t) -\delta_{v_B}(t,X_t) h^p + \mathcal{O}(h^{p+1})`$. Although this expression does not say that Perturbed Continuous can be treated like Base Continuous, it does rule out the idea that $v_P(t,x)$ cannot have have regularity assumption applied. So now we can bound $`v_P(t, X_t^P) - v_B(t, X_t)`$ as below:
 ```math
-\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\| + \left\| \delta_{v_B}(t,X_t) h^p \right\| + \mathcal{O}(h^{p+1}) 
+\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\| + \left\| h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \right\|
 ```
 
 Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality. Vanilla Gronwall's inequality has this basic structure:
@@ -50,7 +55,7 @@ Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's 
 & \text{thus } f(t) \le f(0)\exp \left(\int_0^t C(s)ds \right) \\
 \end{align*}
 ```
-where $`C(s)`$ and $`f(t)`$ are some real-valued functions. Now, we'll use a more extended version of Gronwall's inequality:
+where $`C(s)`$ and $`f(t)`$ are some real-valued functions. But to deal with $`\left\| h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \right\|`$, we'll use the extended version of Gronwall's inequality:
 ```math
 \begin{align*}
 & \text{Given } \dot{f}(t) \le C(t)f(t) + a(t) \Leftrightarrow f(t) \le f(0) + \int_0^t C(s)f(s) ds + \int_0^t a(s) ds, \\
@@ -58,7 +63,7 @@ where $`C(s)`$ and $`f(t)`$ are some real-valued functions. Now, we'll use a mor
 \end{align*}
 ```
 
-Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, $`\dot{f}(t) := \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$. For $`f(0)`, we'll set it `f(0) := 0`$ since Perturbed Continuous and Base Continuous starts from the same $`X_0`$. 
+Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, thus $`\dot{f}(t) = \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|` and $`C(t) := L_p(t)`$. For $`f(0)`, we'll set it `f(0) := 0`$ since Perturbed Continuous and Base Continuous starts from the same $`X_0`$. This means that the remaining term to be denoted is $`a(t) := \left\| h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \right\|`$.
 
 
 We have just figured out the upper bound for $`\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$. So plug that into the RHS of extended Gronwall's inequality, we get:
