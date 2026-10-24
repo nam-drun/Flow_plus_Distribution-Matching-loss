@@ -65,9 +65,14 @@ where $`C(s)`$ and $`f(t)`$ are some real-valued functions. But to deal with $`\
 \end{align*}
 ```
 
-Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, thus $`\dot{f}(t) = \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|` and $`C(t) := L_p(t)`$. For $`f(0)`, we'll set it `f(0) := 0`$ since Perturbed Continuous and Base Continuous starts from the same $`X_0`$. This means that the remaining term to be denoted is $`a(t) := \left\| h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \right\|`$. And with that, we now have access to the prerequisite condition of extended Gronwall's inequality. Applying extended Gronwall's inequality, we get:
+Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, thus $`\dot{f}(t) = \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|` and $`C(t) := L_p(t)`$. For $`f(0)`, we'll set it `f(0) := 0`$ since Perturbed Continuous and Base Continuous starts from the same $`X_0`$. This means that the remaining term to be denoted is $`g(t) := \left\| h^p \delta_{v_B}(t,x) + h^{p+1}r_h(t,x) \right\|`$. And with that, we now have access to the prerequisite condition of extended Gronwall's inequality. Applying extended Gronwall's inequality, we get:
 ```math
 \begin{align*}
 & \left\| X_t^P - X_t \right\| \le h^p \int_0^t \exp \left(\int_s^t L_P(r) dr \right) g(s)ds
 \end{align*}
+```
+
+Plug $`\left\| X_t^P - X_t \right\|`$ back to the RHS of $`\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$ above, we get:
+```math
+\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| \le h^p \left[g(t) + L_p(t) \int_0^t \exp \left(\int_s^t L_P(r) dr \right) g(s)ds \right]
 ```
