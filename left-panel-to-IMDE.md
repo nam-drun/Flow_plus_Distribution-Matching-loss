@@ -25,7 +25,7 @@ Which is backed by Figure 2 in the paper. This expression implicates that $`v_P(
 f_h - f = -h^p \delta f  + \mathcal{O}(h^{p+1})
 ```
 
-Rewrite the LHS in "left panel"'s notation and write $`\mathcal{O}(h^{p+1})` in full form:
+Rewrite the LHS in "left panel"'s notation and write $`\mathcal{O}(h^{p+1})`$ in full form:
 ```math
 \begin{align*}
 & v_P(t,x) - v_B(t,x) = -h^p \delta_{v_B}(t,x) + h^{p+1} f_{p+1} + h^{p+2} f_{p+2} + \cdots \\
