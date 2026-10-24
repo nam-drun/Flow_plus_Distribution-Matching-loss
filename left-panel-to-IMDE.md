@@ -17,22 +17,18 @@ We want to quantify the relationship between $`v_P(t, X_t^P)`$ and $`v_B(t, X_t)
 # Bounding theorem 3.2 from IMDE paper
 Now, the first expression in theorem 3.2 is:
 ```math
-\begin{align*}
 & \Phi_{h,f}(x) = \phi_{h,f}(x) + h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}) \\
-& \Phi_{h,f}(x) - \phi_{h,f}(x) = h^{p+1} \delta_f(x) + \mathcal{O}(h^{p+2}), \\
-\end{align*}
 ```
 
-Which is backed by Figure 2 in the paper. This expression implicates that $`v_P(t, X_t^P)`$ is affected by our intent to leverage discretisation error via $-\delta f$.
+Which is backed by Figure 2 in the paper. This expression implicates that $`v_P(t, X_t^P)`$ is affected by our intent to leverage discretisation error via $-\delta f$. Therefore, the power series expansion of $`v_P(t, X_t^P)`$ now becomes:
 ```math
 \begin{align*}
-& f_h - f = - h^p -\delta f + \mathcal{O}(h^{p+1}) \\
-& f_h - f = -\delta f h^p + \mathcal{O}(h^{p+1}) \\
-& v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + \mathcal{O}(h^{p+1}) \\
+& f_h - f = -h^p \delta f  + \mathcal{O}(h^{p+1}) \\
+& v_P(t,x) - v_B(t,x) = -\delta_{v_B}(t,x) h^p + h^{p+1} f_{p+1} + h^{p+2} f_{p+2} + \cdots \\
 \end{align*}
 ```
 
-Although this is not yet $`v_P(t, X_t^P) - v_B(t, X_t)`$, it is nonetheless enables us to delegate the unknown to a simpler expression
+Although this is not yet $`v_P(t, X_t^P) - v_B(t, X_t)`$, but it nonetheless enables us to delegate the unknown to a simpler expression
 ```math
 \begin{align*}
 & v_P(t, X_t^P) - v_B(t, X_t) = v_P(t, X_t^P) - v_P(t, X_t) + v_P(t, X_t) - v_B(t, X_t) \\
@@ -47,14 +43,22 @@ From this assumption on $v_B(t, X_t)$, we evoke another Lipschitz regularity ass
 \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\| \le L(t)_P \left\| X_t^P - X_t \right\| + \left\| \delta_{v_B}(t,X_t) h^p \right\| + \mathcal{O}(h^{p+1}) 
 ```
 
-Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality. Gronwall's inequality has this basic structure:
+Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's inequality. Vanilla Gronwall's inequality has this basic structure:
 ```math
 \begin{align*}
-& \text{Given } \dot{f}(t) \le g(t)f(t) \Leftrightarrow f(t) \le f(0) + \int_0^t g(s)f(s) ds, \\
-& \text{thus } f(t) \le f(0)\exp \left(\int_0^t g(s)ds \right) \\
+& \text{Given } \dot{f}(t) \le C(t)f(t) \Leftrightarrow f(t) \le f(0) + \int_0^t C(s)f(s) ds, \\
+& \text{thus } f(t) \le f(0)\exp \left(\int_0^t C(s)ds \right) \\
 \end{align*}
 ```
-where $`g(s)`$ and $`f(t)`$ are some real-valued functions. Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, hence $`\dot{f}(t) := \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$ and $`f(0) = 0`$ (Perturbed Continuous and Base Continuous starts from the same $`X_0`$). Now, we have just figured out the upper bound for $`\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$, so plug that into the RHS of Gronwall's inequality, we get:
+where $`C(s)`$ and $`f(t)`$ are some real-valued functions. Now, we'll use a more extended version of Gronwall's inequality:
+```math
+\begin{align*}
+& \text{Given } \dot{f}(t) \le C(t)f(t) + a(t) \Leftrightarrow f(t) \le f(0) + \int_0^t C(s)f(s) ds + + \int_0^t a(s) ds, \\
+& \text{thus } f(t) \le f(0) \exp \left(\int_0^t C(s)ds \right) + \int_0^t \exp \left(\int_0^t C(s)ds \right) + a(s) ds \\
+\end{align*}
+```
+
+Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, hence $`\dot{f}(t) := \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$ and $`f(0) = 0`$ (Perturbed Continuous and Base Continuous starts from the same $`X_0`$). Now, we have just figured out the upper bound for $`\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$, so plug that into the RHS of Gronwall's inequality, we get:
 ```math
 \left\| X_t^P - X_t \right\| \le \exp \left(\int_0^t g(s)ds \right)
 ```
