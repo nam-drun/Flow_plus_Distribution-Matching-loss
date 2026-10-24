@@ -53,8 +53,8 @@ Now we just need to figure out $`\left\| X_t^P - X_t \right\|`$ with Gronwall's 
 where $`C(s)`$ and $`f(t)`$ are some real-valued functions. Now, we'll use a more extended version of Gronwall's inequality:
 ```math
 \begin{align*}
-& \text{Given } \dot{f}(t) \le C(t)f(t) + a(t) \Leftrightarrow f(t) \le f(0) + \int_0^t C(s)f(s) ds + + \int_0^t a(s) ds, \\
-& \text{thus } f(t) \le f(0) \exp \left(\int_0^t C(s)ds \right) + \int_0^t \exp \left(\int_0^t C(s)ds \right) + a(s) ds \\
+& \text{Given } \dot{f}(t) \le C(t)f(t) + a(t) \Leftrightarrow f(t) \le f(0) + \int_0^t C(s)f(s) ds + \int_0^t a(s) ds, \\
+& \text{thus } f(t) \le f(0) \exp \left(\int_0^t C(s)ds \right) + \int_0^t \exp \left(\int_0^t C(s)ds \right) a(s) ds \\
 \end{align*}
 ```
 
