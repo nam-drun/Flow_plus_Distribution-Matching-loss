@@ -2,7 +2,7 @@
 | ------------------------------------  | -----------------------------------------------| --------------------------------------------------|------------------------------------------------------------------- | 
 | N                                     | S                                              | number of sampling steps. $h$ is time interval    | $\frac1N = \Delta t = h$                                           | 
 | $X_0$                                 | $x$                                            | start point                                       | $X_0 \sim \mathcal{N}(0, I_d)$                                     |
-| $X_1$                                 | $\phi_{Sh,f}(x)$                               | Base continuous end point. $Sh$ is time interval  | $X_0 + \int_0^1 v(s, X_s) ds$. $Sh$ is time interval               |
+| $X_1$                                 | $\phi_{Sh,f}(x)$                               | Base Continuous end point. $Sh$ is time interval  | $X_0 + \int_0^1 v(s, X_s) ds$. $Sh$ is time interval               |
 | $v_B(t, x)$                           | $f$                                            | Base velocity field                               | $`v_B(t, x) \approx \dot{X}_t`$                                    |
 | $v_P(t, x)$                           | $f_h$                                          | Perturbed velocity field                          | $`v_P(t, x) = v_B(t, x) + \Delta \theta`$. $\theta$ is NN weight   |
 | $`\hat{X}_1^{Euler, B}`$              | $(\Phi_{h,f})^S(x)$                            | Base Euler end point.                             | $`\hat{X}_1^{Euler, B} = \Delta t \sum_{k=0}^{N-1} v_B(t_k, x)`$   |
@@ -79,4 +79,5 @@ Plug $`\left\| X_t^P - X_t \right\|`$ back to the RHS of $`\left\| v_P(t, X_t^P)
 
 At this point, it is clear that IMDE paper with Gronwall's inequality won't have us deriving $`v_P(t, X_t^P)`$ exactly. So what is the remedy?
 
-# IMDE eq(2) + Perturbed Euler end point equality.
+# IMDE eq(2) + IMDE equality + small step size
+
