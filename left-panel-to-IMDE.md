@@ -58,7 +58,9 @@ where $`C(s)`$ and $`f(t)`$ are some real-valued functions. Now, we'll use a mor
 \end{align*}
 ```
 
-Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, hence $`\dot{f}(t) := \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$ and $`f(0) = 0`$ (Perturbed Continuous and Base Continuous starts from the same $`X_0`$). Now, we have just figured out the upper bound for $`\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$, so plug that into the RHS of Gronwall's inequality, we get:
+Denote $`f(t) := \left\| X_t^P - X_t \right\|`$, $`\dot{f}(t) := \left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$, and $`f(0) := 0`$ (since Perturbed Continuous and Base Continuous starts from the same $`X_0`$). We have just figured out the upper bound for $`\left\| v_P(t, X_t^P) - v_B(t, X_t) \right\|`$, so plug that into the RHS of extended Gronwall's inequality, we get:
 ```math
-\left\| X_t^P - X_t \right\| \le \exp \left(\int_0^t g(s)ds \right)
+\begin{align*}
+& \left\| X_t^P - X_t \right\| \le \int_0^t L_P(s) \left\| v_P(s, X_s^P) - v_B(s, X_s) \right\| ds + \int_0^t
+\end{align*}
 ```
